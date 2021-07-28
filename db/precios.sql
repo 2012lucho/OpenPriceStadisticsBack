@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-07-2021 a las 21:27:23
+-- Tiempo de generación: 28-07-2021 a las 15:38:00
 -- Versión del servidor: 10.3.29-MariaDB-0+deb10u1
 -- Versión de PHP: 7.3.27-1~deb10u1
 
@@ -46,7 +46,8 @@ INSERT INTO `branch` (`id`, `name`, `latitude`, `longitude`, `address_road`, `ad
 (2, 'Asia Online', 0, 0, '0', 0, 2),
 (3, 'Asia - España 502 - Tandil', 0, 0, 'Av. España', 502, 2),
 (4, 'Soychú Tandil', 0, 0, '-', 0, 3),
-(5, 'Carnicerías Tandil', 0, 0, 'Río de janeiro', 619, 4);
+(5, 'Carnicerías Tandil', 0, 0, 'Río de janeiro', 619, 4),
+(6, 'Punto Carne Tandil', 0, 0, '0', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,23 @@ INSERT INTO `category` (`id`, `root_category_id`, `name`) VALUES
 (39, 38, 'Milanesa de Pollo'),
 (45, 11, 'Carne de Vaca'),
 (46, 45, 'Asado de Ternera'),
-(47, 45, 'Tapa de asado');
+(47, 45, 'Tapa de asado'),
+(48, NULL, 'Bebidas'),
+(49, 48, 'Bebidas con Alcohol'),
+(50, 49, 'Vino'),
+(51, 50, 'Vino Tinto'),
+(52, 51, 'Vino Malbec'),
+(53, 49, 'Cerveza'),
+(54, 53, 'Cerveza Rubia'),
+(55, NULL, 'Lácteo'),
+(56, 55, 'Yogur'),
+(57, 56, 'Yogur Bebible'),
+(58, 57, 'Yogur Bebible Vainilla'),
+(59, 55, 'Leche'),
+(60, 59, 'Leche Chocolatada'),
+(61, 45, 'Vacío'),
+(62, 45, 'Asado Americano'),
+(63, 45, 'Falda Parrillera');
 
 -- --------------------------------------------------------
 
@@ -125,6 +142,7 @@ CREATE TABLE `enterprice` (
 
 INSERT INTO `enterprice` (`id`, `name`) VALUES
 (4, 'Carnicerías Tandil'),
+(5, 'Punto Carne Tandil'),
 (3, 'Soychú Tandil'),
 (2, 'Supermercados Asia'),
 (1, 'Supermercados Monarca');
@@ -181,7 +199,17 @@ INSERT INTO `price` (`id`, `product_id`, `price`, `date_time`, `user_id`, `branc
 (33, 29, 50, '2021-07-05 21:12:23', NULL, 3, 1, 50),
 (34, 30, 200, '2021-12-02 21:17:26', NULL, 4, 0, NULL),
 (35, 31, 500, '2021-07-07 21:24:43', NULL, 5, 0, NULL),
-(36, 32, 650, '2021-07-07 21:26:43', NULL, 5, 0, NULL);
+(36, 32, 650, '2021-07-07 21:26:43', NULL, 5, 0, NULL),
+(37, 33, 160.65, '2021-07-28 15:00:52', NULL, 1, 1, 15),
+(38, 34, 174.25, '2021-07-28 15:03:26', NULL, 1, 1, 15),
+(39, 35, 110.5, '2021-07-28 15:06:08', NULL, 1, 1, 15),
+(40, 36, 89.25, '2021-07-28 15:07:50', NULL, 1, 1, 15),
+(41, 37, 174.25, '2021-07-28 15:09:34', NULL, 1, 1, 15),
+(42, 38, 113.6, '2021-07-26 15:16:43', NULL, 1, 1, 20),
+(43, 39, 225, '2021-07-26 15:21:25', NULL, 1, 0, NULL),
+(44, 40, 570, '2021-07-24 15:27:52', NULL, 6, 0, NULL),
+(45, 41, 550, '2021-07-21 15:30:39', NULL, 6, 0, NULL),
+(46, 42, 300, '2021-07-17 15:32:51', NULL, 6, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +259,17 @@ INSERT INTO `products` (`id`, `name`, `vendor_id`) VALUES
 (29, 'Cacao Arcor - 180Gr', 30),
 (30, 'Milanesa de Pollo - Soychú - 1Kg', 31),
 (31, 'Asado de ternera - 1Kg', 10),
-(32, 'Tapa de asado - 1Kg', 10);
+(32, 'Tapa de asado - 1Kg', 10),
+(33, 'Vino Novecento - Malbec - 750cc', 32),
+(34, 'Cerveza Patagonia - 730Ml', 33),
+(35, 'Cerveza Rubia - Budweiser - 750Ml', 34),
+(36, 'Cerveza Rubia - Andes - 473Ml', 35),
+(37, 'Cerveza Rubia - Corona - 710Ml', 36),
+(38, 'Yogur Bebible - La Serenísima - Vainilla - 1L', 37),
+(39, 'Leche Chocolatada - Cindor - 1L', 38),
+(40, 'Vacío', 10),
+(41, 'Asado Americano', 10),
+(42, 'Falda Parrillera', 10);
 
 -- --------------------------------------------------------
 
@@ -280,7 +318,17 @@ INSERT INTO `product_category` (`id`, `product_id`, `category_id`) VALUES
 (28, 29, 37),
 (29, 30, 39),
 (30, 31, 46),
-(31, 32, 47);
+(31, 32, 47),
+(32, 33, 52),
+(33, 34, 53),
+(34, 35, 54),
+(35, 36, 54),
+(36, 37, 54),
+(37, 38, 58),
+(38, 39, 60),
+(39, 40, 61),
+(40, 41, 62),
+(41, 42, 63);
 
 -- --------------------------------------------------------
 
@@ -329,7 +377,14 @@ INSERT INTO `vendor` (`id`, `name`, `root_vendor_id`) VALUES
 (28, 'Pepitos', NULL),
 (29, 'Hellmann\'s', NULL),
 (30, 'Arcor', NULL),
-(31, 'Soychú', NULL);
+(31, 'Soychú', NULL),
+(32, 'Novecento', NULL),
+(33, 'Patagonia', NULL),
+(34, 'Budweiser', NULL),
+(35, 'Andes', NULL),
+(36, 'Corona', NULL),
+(37, 'La Serenísima', NULL),
+(38, 'Cindor', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -399,43 +454,43 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT de la tabla `branch`
 --
 ALTER TABLE `branch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `enterprice`
 --
 ALTER TABLE `enterprice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `price`
 --
 ALTER TABLE `price`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Restricciones para tablas volcadas
