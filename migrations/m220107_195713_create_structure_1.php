@@ -62,6 +62,54 @@ class m220107_195713_create_structure_1 extends Migration
             'root_vendor_id' => $this->integer()
         ]);
 
+        $this->addForeignKey(
+            'branch_ibfk_1', 
+            'branch','enterprise_id', 
+            'enterprice','id'
+        );
+
+        $this->addForeignKey(
+            'category_ibfk_1', 
+            'category','root_category_id', 
+            'category','id'
+        );
+
+        $this->addForeignKey(
+            'price_ibfk_1', 
+            'price','branch_id', 
+            'branch','id'
+        );
+
+        $this->addForeignKey(
+            'price_ibfk_2', 
+            'price','product_id', 
+            'products','id'
+        );
+
+        $this->addForeignKey(
+            'products_ibfk_1', 
+            'products','vendor_id', 
+            'vendor','id'
+        );
+
+        $this->addForeignKey(
+            'product_category_ibfk_1', 
+            'product_category','product_id', 
+            'products','id'
+        );
+
+        $this->addForeignKey(
+            'product_category_ibfk_2', 
+            'product_category','category_id', 
+            'category','id'
+        );
+
+        $this->addForeignKey(
+            'vendor_ibfk_1', 
+            'vendor','root_vendor_id', 
+            'vendor','id'
+        );
+
     }
 
     /**

@@ -12,6 +12,13 @@ class m220107_195735_initial_data_1 extends Migration
      */
     public function safeUp()
     {
+        //Inserts enterprice
+        $this->insert('enterprice',  [ 'id' => 1, 'name' => 'Supermercados Monarca']);
+        $this->insert('enterprice',  [ 'id' => 2, 'name' => 'Supermercados Asia']);
+        $this->insert('enterprice',  [ 'id' => 3, 'name' => 'Soychú Tandil']);
+        $this->insert('enterprice',  [ 'id' => 4, 'name' => 'Carnicerías Tandil']);
+        $this->insert('enterprice',  [ 'id' => 5, 'name' => 'Punto Carne Tandil']);
+
         //Inserts Branch
         $this->insert('branch',  [ 'id' => 1,'name' => 'Monarca Online',
             'latitude' => 0, 'longitude' => 0, 'address_road' => '0', 
@@ -55,7 +62,6 @@ class m220107_195735_initial_data_1 extends Migration
         $this->insert('category',  [ 'id' => 15,'root_category_id' => NULL,'name' => 'Antitranspirante']);
         $this->insert('category',  [ 'id' => 16,'root_category_id' => 15,'name' => 'Antitranspirante en Aerosol']);
         $this->insert('category',  [ 'id' => 17,'root_category_id' => NULL,'name' => 'Yerba']);
-        $this->insert('category',  [ 'id' => 18,'root_category_id' => 27,'name' => 'Shampoo']);
         $this->insert('category',  [ 'id' => 19,'root_category_id' => NULL,'name' => 'Suavizante']);
         $this->insert('category',  [ 'id' => 20,'root_category_id' =>  13,'name' => 'Fideo Moño']);
         $this->insert('category',  [ 'id' => 21,'root_category_id' => NULL,'name' => 'Tomate en Lata']);
@@ -65,6 +71,7 @@ class m220107_195735_initial_data_1 extends Migration
         $this->insert('category',  [ 'id' => 25,'root_category_id' =>  NULL,'name' => 'Atun']);
         $this->insert('category',  [ 'id' => 26,'root_category_id' => 25,'name' => 'Atún Desmenuzado al Natural']);
         $this->insert('category',  [ 'id' => 27,'root_category_id' => NULL,'name' => 'Aseo Personal']);
+        $this->insert('category',  [ 'id' => 18,'root_category_id' => 27,'name' => 'Shampoo']);
         $this->insert('category',  [ 'id' => 28,'root_category_id' => 27,'name' => 'Pasta Dental']);
         $this->insert('category',  [ 'id' => 29,'root_category_id' =>  NULL,'name' => 'Arroz']);
         $this->insert('category',  [ 'id' => 30,'root_category_id' => NULL,'name' => 'Aceite']);
@@ -96,57 +103,47 @@ class m220107_195735_initial_data_1 extends Migration
         $this->insert('category',  [ 'id' => 61,'root_category_id' => 45,'name' => 'Vacío']);
         $this->insert('category',  [ 'id' => 62,'root_category_id' => 45,'name' => 'Asado Americano']);
         $this->insert('category',  [ 'id' => 63,'root_category_id' => 45,'name' => 'Falda Parrillera']);
+        
+        //vendor
+        $this->insert('vendor',  [ 'id' => 1, 'name' => 'Terrabusi', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 2, 'name' => 'Express', 'root_vendor_id' => 1]);
+        $this->insert('vendor',  [ 'id' => 3, 'name' => 'Oreo', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 4, 'name' => 'La Campagnola', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 5, 'name' => 'BC', 'root_vendor_id' => 4]);
+        $this->insert('vendor',  [ 'id' => 6, 'name' => 'Bagley', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 7, 'name' => 'Chocolinas', 'root_vendor_id' => 6]);
+        $this->insert('vendor',  [ 'id' => 8, 'name' => 'Nescafe', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 9, 'name' => 'Dolca', 'root_vendor_id' => 8]);
+        $this->insert('vendor',  [ 'id' => 10, 'name' => 'Desconocido', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 11, 'name' => 'Knorr', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 12, 'name' => 'Arlistán', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 13, 'name' => 'Dove', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 14, 'name' => 'Nobleza Gaucha', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 15, 'name' => 'Tresemmé', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 16, 'name' => 'Vivere', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 17, 'name' => 'Matarazzo', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 18, 'name' => 'INCA', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 19, 'name' => 'Ayudín', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 20, 'name' => 'Caracas', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 21, 'name' => 'Colgate', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 22, 'name' => 'Gallo', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 23, 'name' => 'Lira', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 24, 'name' => 'Sedal', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 25, 'name' => 'Ala', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 26, 'name' => 'Skip', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 27, 'name' => 'Yatay', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 28, 'name' => 'Pepitos', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 29, 'name' => 'Hellmann\'s', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 30, 'name' => 'Arcor', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 31, 'name' => 'Soychú', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 32, 'name' => 'Novecento', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 33, 'name' => 'Patagonia', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 34, 'name' => 'Budweiser', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 35, 'name' => 'Andes', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 36, 'name' => 'Corona', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 37, 'name' => 'La Serenísima', 'root_vendor_id' => NULL]);
+        $this->insert('vendor',  [ 'id' => 38, 'name' => 'Cindor', 'root_vendor_id' => NULL]);
 
-        //Inserts enterprice
-        $this->insert('enterprice',  [ 'id' => 1, 'name' => 'Supermercados Monarca']);
-        $this->insert('enterprice',  [ 'id' => 2, 'name' => 'Supermercados Asia']);
-        $this->insert('enterprice',  [ 'id' => 3, 'name' => 'Soychú Tandil']);
-        $this->insert('enterprice',  [ 'id' => 4, 'name' => 'Carnicerías Tandil']);
-        $this->insert('enterprice',  [ 'id' => 5, 'name' => 'Punto Carne Tandil']);
-
-        //inserts price
-        $this->insert('price',  ['id' => 6,  'product_id' => 1, 'price' => 90, 'date_time' => '2021-07-16 16:43:29', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 7,  'product_id' => 2, 'price' => 140, 'date_time' => '2021-07-16 16:45:20', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 8,  'product_id' => 3, 'price' => 109.3, 'date_time' => '2021-07-16 16:52:00', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 9,  'product_id' => 5, 'price' => 150, 'date_time' => '2021-07-14 17:00:19', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 10, 'product_id' => 6, 'price' => 90, 'date_time' => '2021-07-14 17:03:34', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 11, 'product_id' => 7, 'price' => 290, 'date_time' => '2021-07-05 17:09:35', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 12, 'product_id' => 8, 'price' => 70, 'date_time' => '2021-06-14 17:13:04', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 13, 'product_id' => 9, 'price' => 75, 'date_time' => '2021-07-08 20:06:22', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 14, 'product_id' => 10, 'price' => 300, 'date_time' => '2021-07-08 20:08:31', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 15, 'product_id' => 11, 'price' => 190, 'date_time' => '2021-07-08 20:12:39', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 16, 'product_id' => 12, 'price' => 400, 'date_time' => '2021-07-08 20:14:35', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 17, 'product_id' => 13, 'price' => 440, 'date_time' => '2021-07-08 20:18:11', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 18, 'product_id' => 14, 'price' => 125, 'date_time' => '2021-07-08 20:20:43', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 19, 'product_id' => 15, 'price' => 110, 'date_time' => '2021-07-08 20:27:04', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 20, 'product_id' => 16, 'price' => 95, 'date_time' => '2021-07-08 20:30:27', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 21, 'product_id' => 17, 'price' => 270, 'date_time' => '2021-07-08 20:35:51', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 22, 'product_id' => 18, 'price' => 100, 'date_time' => '2021-07-08 20:38:26', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 23, 'product_id' => 19, 'price' => 205, 'date_time' => '2021-07-08 20:41:34', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 24, 'product_id' => 20, 'price' => 180, 'date_time' => '2021-07-08 20:43:43', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 25, 'product_id' => 21, 'price' => 200, 'date_time' => '2021-07-08 20:46:44', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 26, 'product_id' => 22, 'price' => 365, 'date_time' => '2021-07-08 20:49:14', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 27, 'product_id' => 23, 'price' => 109, 'date_time' => '2021-07-08 20:51:34', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 28, 'product_id' => 24, 'price' => 600, 'date_time' => '2021-07-12 20:56:36', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 29, 'product_id' => 25, 'price' => 650, 'date_time' => '2021-07-12 20:58:58', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 30, 'product_id' => 26, 'price' => 80, 'date_time' => '2021-07-12 21:02:41', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 31, 'product_id' => 27, 'price' => 180, 'date_time' => '2021-07-11 21:05:01', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 32, 'product_id' => 28, 'price' => 130, 'date_time' => '2021-07-05 21:10:05', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 1, 'porcentage_oferta' => 13]);
-        $this->insert('price',  ['id' => 33, 'product_id' => 29, 'price' => 50, 'date_time' => '2021-07-05 21:12:23', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 1, 'porcentage_oferta' => 50]);
-        $this->insert('price',  ['id' => 34, 'product_id' => 30, 'price' => 200, 'date_time' => '2021-12-02 21:17:26', 'user_id' => NULL, 'branch_id' => 4, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 35, 'product_id' => 31, 'price' => 500, 'date_time' => '2021-07-07 21:24:43', 'user_id' => NULL, 'branch_id' => 5, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 36, 'product_id' => 32, 'price' => 650, 'date_time' => '2021-07-07 21:26:43', 'user_id' => NULL, 'branch_id' => 5, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 37, 'product_id' => 33, 'price' => 160.65, 'date_time' => '2021-07-28 15:00:52', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
-        $this->insert('price',  ['id' => 38, 'product_id' => 34, 'price' => 174.25, 'date_time' => '2021-07-28 15:03:26', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
-        $this->insert('price',  ['id' => 39, 'product_id' => 35, 'price' => 110.5, 'date_time' => '2021-07-28 15:06:08', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
-        $this->insert('price',  ['id' => 40, 'product_id' => 36, 'price' => 89.25, 'date_time' => '2021-07-28 15:07:50', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
-        $this->insert('price',  ['id' => 41, 'product_id' => 37, 'price' => 174.25, 'date_time' => '2021-07-28 15:09:34', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
-        $this->insert('price',  ['id' => 42, 'product_id' => 38, 'price' => 113.6, 'date_time' => '2021-07-26 15:16:43', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 20]);
-        $this->insert('price',  ['id' => 43, 'product_id' => 39, 'price' => 225, 'date_time' => '2021-07-26 15:21:25', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 44, 'product_id' => 40, 'price' => 570, 'date_time' => '2021-07-24 15:27:52', 'user_id' => NULL, 'branch_id' => 6, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 45, 'product_id' => 41, 'price' => 550, 'date_time' => '2021-07-21 15:30:39', 'user_id' => NULL, 'branch_id' => 6, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-        $this->insert('price',  ['id' => 46, 'product_id' => 42, 'price' => 300, 'date_time' => '2021-07-17 15:32:51', 'user_id' => NULL, 'branch_id' => 6, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
-    
         //products
         $this->insert('products',  [ 'id' => 1, 'name' => 'Galletita Terrabusi Boca de Dama - 160Gr', 'vendor_id' =>  1]);
         $this->insert('products',  [ 'id' => 2, 'name' => 'Galletita Terrabusi Surtidas - 400 Gr', 'vendor_id' =>  1]);
@@ -191,6 +188,50 @@ class m220107_195735_initial_data_1 extends Migration
         $this->insert('products',  [ 'id' => 41, 'name' => 'Asado Americano', 'vendor_id' =>  10]);
         $this->insert('products',  [ 'id' => 42, 'name' => 'Falda Parrillera', 'vendor_id' =>  10]);
 
+        //inserts price
+        $this->insert('price',  ['id' => 6,  'product_id' => 1, 'price' => 90, 'date_time' => '2021-07-16 16:43:29', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 7,  'product_id' => 2, 'price' => 140, 'date_time' => '2021-07-16 16:45:20', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 8,  'product_id' => 3, 'price' => 109.3, 'date_time' => '2021-07-16 16:52:00', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 9,  'product_id' => 5, 'price' => 150, 'date_time' => '2021-07-14 17:00:19', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 10, 'product_id' => 6, 'price' => 90, 'date_time' => '2021-07-14 17:03:34', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 11, 'product_id' => 7, 'price' => 290, 'date_time' => '2021-07-05 17:09:35', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 12, 'product_id' => 8, 'price' => 70, 'date_time' => '2021-06-14 17:13:04', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 13, 'product_id' => 9, 'price' => 75, 'date_time' => '2021-07-08 20:06:22', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 14, 'product_id' => 10, 'price' => 300, 'date_time' => '2021-07-08 20:08:31', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 15, 'product_id' => 11, 'price' => 190, 'date_time' => '2021-07-08 20:12:39', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 16, 'product_id' => 12, 'price' => 400, 'date_time' => '2021-07-08 20:14:35', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 17, 'product_id' => 13, 'price' => 440, 'date_time' => '2021-07-08 20:18:11', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 18, 'product_id' => 14, 'price' => 125, 'date_time' => '2021-07-08 20:20:43', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 19, 'product_id' => 15, 'price' => 110, 'date_time' => '2021-07-08 20:27:04', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 20, 'product_id' => 16, 'price' => 95, 'date_time' => '2021-07-08 20:30:27', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 21, 'product_id' => 17, 'price' => 270, 'date_time' => '2021-07-08 20:35:51', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 22, 'product_id' => 18, 'price' => 100, 'date_time' => '2021-07-08 20:38:26', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 23, 'product_id' => 19, 'price' => 205, 'date_time' => '2021-07-08 20:41:34', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 24, 'product_id' => 20, 'price' => 180, 'date_time' => '2021-07-08 20:43:43', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 25, 'product_id' => 21, 'price' => 200, 'date_time' => '2021-07-08 20:46:44', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 26, 'product_id' => 22, 'price' => 365, 'date_time' => '2021-07-08 20:49:14', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 27, 'product_id' => 23, 'price' => 109, 'date_time' => '2021-07-08 20:51:34', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 28, 'product_id' => 24, 'price' => 600, 'date_time' => '2021-07-12 20:56:36', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 29, 'product_id' => 25, 'price' => 650, 'date_time' => '2021-07-12 20:58:58', 'user_id' => NULL, 'branch_id' => 2, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 30, 'product_id' => 26, 'price' => 80, 'date_time' => '2021-07-12 21:02:41', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 31, 'product_id' => 27, 'price' => 180, 'date_time' => '2021-07-11 21:05:01', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 32, 'product_id' => 28, 'price' => 130, 'date_time' => '2021-07-05 21:10:05', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 1, 'porcentage_oferta' => 13]);
+        $this->insert('price',  ['id' => 33, 'product_id' => 29, 'price' => 50, 'date_time' => '2021-07-05 21:12:23', 'user_id' => NULL, 'branch_id' => 3, 'es_oferta' => 1, 'porcentage_oferta' => 50]);
+        $this->insert('price',  ['id' => 34, 'product_id' => 30, 'price' => 200, 'date_time' => '2021-12-02 21:17:26', 'user_id' => NULL, 'branch_id' => 4, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 35, 'product_id' => 31, 'price' => 500, 'date_time' => '2021-07-07 21:24:43', 'user_id' => NULL, 'branch_id' => 5, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 36, 'product_id' => 32, 'price' => 650, 'date_time' => '2021-07-07 21:26:43', 'user_id' => NULL, 'branch_id' => 5, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 37, 'product_id' => 33, 'price' => 160.65, 'date_time' => '2021-07-28 15:00:52', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
+        $this->insert('price',  ['id' => 38, 'product_id' => 34, 'price' => 174.25, 'date_time' => '2021-07-28 15:03:26', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
+        $this->insert('price',  ['id' => 39, 'product_id' => 35, 'price' => 110.5, 'date_time' => '2021-07-28 15:06:08', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
+        $this->insert('price',  ['id' => 40, 'product_id' => 36, 'price' => 89.25, 'date_time' => '2021-07-28 15:07:50', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
+        $this->insert('price',  ['id' => 41, 'product_id' => 37, 'price' => 174.25, 'date_time' => '2021-07-28 15:09:34', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 15]);
+        $this->insert('price',  ['id' => 42, 'product_id' => 38, 'price' => 113.6, 'date_time' => '2021-07-26 15:16:43', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 1, 'porcentage_oferta' => 20]);
+        $this->insert('price',  ['id' => 43, 'product_id' => 39, 'price' => 225, 'date_time' => '2021-07-26 15:21:25', 'user_id' => NULL, 'branch_id' => 1, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 44, 'product_id' => 40, 'price' => 570, 'date_time' => '2021-07-24 15:27:52', 'user_id' => NULL, 'branch_id' => 6, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 45, 'product_id' => 41, 'price' => 550, 'date_time' => '2021-07-21 15:30:39', 'user_id' => NULL, 'branch_id' => 6, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+        $this->insert('price',  ['id' => 46, 'product_id' => 42, 'price' => 300, 'date_time' => '2021-07-17 15:32:51', 'user_id' => NULL, 'branch_id' => 6, 'es_oferta' => 0, 'porcentage_oferta' => NULL]);
+    
+
         //product category
         $this->insert('product_category',  [ 'id' => 1, 'product_id' => 1, 'category_id' => 2]);
         $this->insert('product_category',  [ 'id' => 2, 'product_id' => 2, 'category_id' => 3]);
@@ -233,46 +274,6 @@ class m220107_195735_initial_data_1 extends Migration
         $this->insert('product_category',  [ 'id' => 39, 'product_id' => 40, 'category_id' => 61]);
         $this->insert('product_category',  [ 'id' => 40, 'product_id' => 41, 'category_id' => 62]);
         $this->insert('product_category',  [ 'id' => 41, 'product_id' => 42, 'category_id' => 63]);
-
-        //vendor
-        $this->insert('vendor',  [ 'id' => 1, 'name' => 'Terrabusi', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 2, 'name' => 'Express', 'root_vendor_id' => 1]);
-        $this->insert('vendor',  [ 'id' => 3, 'name' => 'Oreo', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 4, 'name' => 'La Campagnola', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 5, 'name' => 'BC', 'root_vendor_id' => 4]);
-        $this->insert('vendor',  [ 'id' => 6, 'name' => 'Bagley', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 7, 'name' => 'Chocolinas', 'root_vendor_id' => 6]);
-        $this->insert('vendor',  [ 'id' => 8, 'name' => 'Nescafe', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 9, 'name' => 'Dolca', 'root_vendor_id' => 8]);
-        $this->insert('vendor',  [ 'id' => 10, 'name' => 'Desconocido', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 11, 'name' => 'Knorr', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 12, 'name' => 'Arlistán', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 13, 'name' => 'Dove', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 14, 'name' => 'Nobleza Gaucha', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 15, 'name' => 'Tresemmé', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 16, 'name' => 'Vivere', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 17, 'name' => 'Matarazzo', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 18, 'name' => 'INCA', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 19, 'name' => 'Ayudín', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 20, 'name' => 'Caracas', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 21, 'name' => 'Colgate', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 22, 'name' => 'Gallo', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 23, 'name' => 'Lira', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 24, 'name' => 'Sedal', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 25, 'name' => 'Ala', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 26, 'name' => 'Skip', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 27, 'name' => 'Yatay', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 28, 'name' => 'Pepitos', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 29, 'name' => 'Hellmann\'s', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 30, 'name' => 'Arcor', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 31, 'name' => 'Soychú', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 32, 'name' => 'Novecento', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 33, 'name' => 'Patagonia', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 34, 'name' => 'Budweiser', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 35, 'name' => 'Andes', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 36, 'name' => 'Corona', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 37, 'name' => 'La Serenísima', 'root_vendor_id' => NULL]);
-        $this->insert('vendor',  [ 'id' => 38, 'name' => 'Cindor', 'root_vendor_id' => NULL]);
     }
     /**
      * {@inheritdoc}
