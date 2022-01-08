@@ -19,7 +19,18 @@ class LoginAction extends CreateAction {
 
       if ($username && $password){
         $user = $this->modelClass::find()->where( ['username' => $username] )->one();
-        $status = $user && Yii::$app->getSecurity()->validatePassword($password, $user->password_hash);
+
+        if (!$user) {
+          $message = 'No existe el usuario';
+        } elseif (!$user->status) {
+          $message = 'Usuario inhabilitado';
+        } elseif (!Yii::$app->getSecurity()->validatePassword($password, $user->password_hash)) {
+          $message = 'Contraseña incorrecta';
+        } else {
+          $status = true;
+        }
+
+        // $status = $user && $user->status && Yii::$app->getSecurity()->validatePassword($password, $user->password_hash);
       }
 
     if ($status)
@@ -27,16 +38,14 @@ class LoginAction extends CreateAction {
           'status' => $status,
           'token'  => $user->access_token,
           'username' => $user->username,
-          'role' => $user->role->type,
+          'roleType' => $user->role->type,
+          'roleId' => $user->role->id,
           'id'   => $user->id,
-          'profile_id'   => $user->profile_id,
-          'verification_email' => $user->verification_email,
-          'online' => $user->online
         ];
     else
       $response->data = [
           'status' => $status,
-          'message' => 'Acceso no autorizado!',
+          'message' => $message,
       ];
   }
 }

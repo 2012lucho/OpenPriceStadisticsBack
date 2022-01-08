@@ -16,27 +16,32 @@ class PasswordResetAction extends CreateAction{
         $response = Yii::$app->getResponse();
         $response->format = \yii\web\Response::FORMAT_JSON;
         $status = false;
-  
+        $user;
+        
         if ($email){
           $profile = Profile::find()->where( ['email' => $email] )->one();
           $user = User::find()->where( ['profile_id' => $profile->id] )->one();
-          $status = $user;
+          // $status = $user;
         }
 
-        if ($user) {
-          if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
-            $user->generatePasswordResetToken();
-            if (!$user->save())
-                $response->data = [
-                  'status' => false,
-                  'message' => 'Acceso no autorizado!',
-                ];
-        }
-        }else{
+        if (!$user) {
           $response->data = [
-            'status' => false,
+            'status' => $status,
             'message' => 'Acceso no autorizado!',
           ];
+        }
+
+        if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
+            $user->generatePasswordResetToken();
+            if (!$user->save()) {
+              $response->data = [
+                'status' => $status,
+                'message' => 'Acceso no autorizado!',
+              ];
+            } else {
+              $status = true;
+            }
+              
         }
 
   
@@ -52,14 +57,13 @@ class PasswordResetAction extends CreateAction{
               ->setSubject('Recuperacion de contraseña para ' . Yii::$app->name)
               ->send();
           $response->data = [
-            'status' => true,
-            'send' => $message,
+            'status' => $status,
             'message' => 'Email enviado!',
            ];
         }
       else
         $response->data = [
-            'status' => false,
+            'status' => $status,
             'message' => 'Acceso no autorizado!',
         ];
     }

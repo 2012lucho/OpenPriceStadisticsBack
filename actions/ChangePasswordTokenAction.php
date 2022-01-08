@@ -8,35 +8,30 @@ use app\models\User;
 
 class ChangePasswordTokenAction extends UpdateAction {
 
-    public function run($id) {
+    public function run( $id ) {
         $params = Yii::$app->getRequest()->getBodyParams();
-        $token = isset($params['token']) ? $params['token'] : null;
+        $user = User::findByPasswordResetToken($token);
+  
         $new_password = isset($params['new_password']) ? $params['new_password'] : null;
-
+  
         $response = Yii::$app->getResponse();
         $response->format = \yii\web\Response::FORMAT_JSON;
   
-        if ($token && $new_password){
-          $user = User::findByPasswordResetToken($token);
-          $transaction = User::getDb()->beginTransaction();
+        if ($new_password){
           if($user){
               $user->password_hash = Yii::$app->getSecurity()->generatePasswordHash($new_password);
-              $id = $user->id;
               if($user->save()){
-                  $transaction->commit();
                   $response->data = [
-                      'status' => true,
-                      'id'   => $id
+                      'status' => $status,
+                      'id'   => $user->id
                   ];
               }else{
-                  $transaction->rollBack();
                   $response->data = [
                       'status' => false,
                       'message' => 'Error no se pudo cambiar la contraseña!',
                   ];                   
               }
-          }else{
-              $transaction->rollBack();
+          } else{
               $response->data = [
                   'status' => false,
                   'message' => 'Error no se pudo cambiar la contraseña!',

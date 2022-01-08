@@ -5,7 +5,7 @@ namespace app\controllers;
 use yii\rest\ActiveController;
 use yii\filters\Cors;
 
-class PasswordResetController extends ActiveController {
+class ResetPasswordController extends ActiveController {
 
     public $modelClass = 'app\models\User';
 
