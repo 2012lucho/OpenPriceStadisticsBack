@@ -95,6 +95,7 @@ $config = [
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-product-category', 'pluralize' => false ],
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-product', 'pluralize' => false ],
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-vendor', 'pluralize' => false ],
+              [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-news', 'pluralize' => false ],
               
             ],
         ],
