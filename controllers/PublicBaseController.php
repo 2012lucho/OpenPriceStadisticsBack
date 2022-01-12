@@ -63,7 +63,7 @@ class PublicBaseController extends ActiveController {
     {
       
       $controller = get_class($event);
-      if ($controller == 'yii\rest\OptionsAction' || $controller == 'yii\rest\CreateAction' || $controller == 'yii\rest\IndexAction'){
+      if ($controller == 'yii\rest\OptionsAction' || $controller == 'yii\rest\CreateAction' || $controller == 'yii\rest\IndexAction'  || $controller == 'yii\base\InlineAction'){
         $controller = get_class($event->controller);
       }
 
@@ -75,7 +75,7 @@ class PublicBaseController extends ActiveController {
       if ($ip === 'UNKNOWN'){
         throw new \Exception('Cuota de uso excedida.');
       }
-
+      
       //Se obtiene la cuota asignada a la funcionalidad
       $servicio = PublicService::find()->where(['controller' => $controller])->one();
       $cuota    = PublicServiceCuota::find()->where(['id_public_service' => $servicio->id])

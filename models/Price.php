@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use app\models\News;
 /**
  * This is the model class for table "price".
  *
@@ -61,6 +61,20 @@ class Price extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert) {
+        //Se crea un nuevo registro en la tabla de novedades
+        $dateTime  = new \DateTime();
+        $dateTime->setTimezone(new \DateTimeZone('America/Argentina/Buenos_Aires'));
+        $dateTime  = $dateTime->format('Y-m-d H:i:s');
+                
+        $news = new News();
+        $news->datetime = $dateTime;
+        $news->text = 'Se cargó un nuevo precio; Producto: '.$this->products->name.' - Precio: $ '.$this->price.' - Comercio: '.$this->branch->name;
+        $news->type_id = 1;
+        $news->save();
+        return parent::beforeSave($insert);
+    }
+
     /**
      * Gets query for [[Branch]].
      *
@@ -76,8 +90,26 @@ class Price extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProduct()
+    public function getProducts()
     {
         return $this->hasOne(Products::className(), ['id' => 'product_id']);
+    }
+
+    public function extraFields() {
+        return [ 'products', 'branch' ];
+    }
+
+    public function fields() {
+        $fields = parent::fields();
+
+        $fields['products'] = function(){
+          return $this->products;
+        };
+
+        $fields['branch'] = function() {
+          return $this->branch;
+        };
+
+        return $fields;
     }
 }

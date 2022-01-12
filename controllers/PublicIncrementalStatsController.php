@@ -3,8 +3,7 @@ namespace app\controllers;
 
 use yii\rest\ActiveController;
 
-
-class PublicProductsController extends PublicProductController {
+class PublicIncrementalStatsController extends PublicBaseController {
 
     public function actions(){
         $actions = parent::actions();
@@ -16,6 +15,6 @@ class PublicProductsController extends PublicProductController {
         return $actions;
     }
 
-    public $modelClass = 'app\models\Products';
+    public $modelClass = 'app\models\IncrementalStats';
 
 }

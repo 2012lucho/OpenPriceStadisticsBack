@@ -3,9 +3,9 @@ namespace app\controllers;
 
 use Yii;
 use yii\rest\ActiveController;
-use app\models\Category;
+use app\models\Products;
 
-class PublicCategoryController extends PublicBaseController {
+class PublicProductsController extends PublicBaseController {
 
     public function actions(){
         $actions = parent::actions();
@@ -18,15 +18,15 @@ class PublicCategoryController extends PublicBaseController {
         return $actions;
     }
 
-    public $modelClass = 'app\models\Category';
+    public $modelClass = 'app\models\Products';
 
     public function actionIndex(){
         $params = Yii::$app->request->queryParams;
 
-        $query = Category::find();
+        $query = Products::find();
         
-        if (isset($params['root_category_id'])){
-            $query->where(['root_category_id' => $params['root_category_id']]);
+        if (isset($params['vendor_id'])){
+            $query->where(['vendor_id' => $params['vendor_id']]);
         }
 
         $query = $query->all();
