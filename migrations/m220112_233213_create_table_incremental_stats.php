@@ -18,6 +18,7 @@ class m220112_233213_create_table_incremental_stats extends Migration
             'key'          => $this->string()->notNull(),
             'description'  => $this->string()->notNull(),
             'value'        => $this->string()->notNull(),
+            'icon'         => $this->string()->notNull()
         ]);
 
         $rows = (new \yii\db\Query())->select('id')->from('enterprice')->all();
@@ -26,7 +27,8 @@ class m220112_233213_create_table_incremental_stats extends Migration
                 'id'          => 1,
                 'key'         => 'cant_enterprice', 
                 'description' => 'Comercios Registrados',
-                'value'       => count($rows)
+                'value'       => count($rows),
+                'icon'        => 'business'
             ]);
 
         $rows = (new \yii\db\Query())->select('id')->from('price')->all();
@@ -35,7 +37,8 @@ class m220112_233213_create_table_incremental_stats extends Migration
                 'id'          => 2,
                 'key'         => 'cant_price', 
                 'description' => 'Precios Registrados',
-                'value'       => count($rows)
+                'value'       => count($rows),
+                'icon'        => 'cash'
             ]);
 
         $rows = (new \yii\db\Query())->select('id')->from('products')->all();
@@ -44,7 +47,8 @@ class m220112_233213_create_table_incremental_stats extends Migration
                 'id'          => 3,
                 'key'         => 'cant_prod', 
                 'description' => 'Productos Registrados',
-                'value'       => count($rows)
+                'value'       => count($rows),
+                'icon'        => 'bag-handle'
             ]);
 
         //Cuota de uso

@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\News;
+use app\models\IncrementalStats;
 /**
  * This is the model class for table "price".
  *
@@ -72,6 +73,11 @@ class Price extends \yii\db\ActiveRecord
         $news->text = 'Se cargó un nuevo precio; Producto: '.$this->products->name.' - Precio: $ '.$this->price.' - Comercio: '.$this->branch->name;
         $news->type_id = 1;
         $news->save();
+
+        //Se suma +1 a la cuenta de precios registrados
+        $stat = IncrementalStats::find()->where(['key' => 'cant_price'])->one();
+        $stat->value = $stat->value + 1;
+        $stat->save(false);
         return parent::beforeSave($insert);
     }
 

@@ -97,7 +97,8 @@ $config = [
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-vendor', 'pluralize' => false ],
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-news', 'pluralize' => false ],
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-incremental-stats', 'pluralize' => false ],
-              
+              [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-enterprice-commercial-item', 'pluralize' => false ],
+
               'products_by_price' => 'public-search-products/get-by-price',
             ],
         ],
