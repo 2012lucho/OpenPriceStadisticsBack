@@ -68,4 +68,8 @@ class EnterpriceCommercialItem extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CommercialItem::className(), ['id' => 'id_commercial_item']);
     }
+
+    public function extraFields() {
+        return [ 'commercialItem', 'enterprice' ];
+    }
 }

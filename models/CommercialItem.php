@@ -10,6 +10,8 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string|null $icon
+ *
+ * @property EnterpriceCommercialItem[] $enterpriceCommercialItems
  */
 class CommercialItem extends \yii\db\ActiveRecord
 {
@@ -42,5 +44,19 @@ class CommercialItem extends \yii\db\ActiveRecord
             'name' => 'Name',
             'icon' => 'Icon',
         ];
+    }
+
+    /**
+     * Gets query for [[EnterpriceCommercialItems]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEnterpriceCommercialItems()
+    {
+        return $this->hasMany(EnterpriceCommercialItem::className(), ['id_commercial_item' => 'id']);
+    }
+
+    public function extraFields() {
+        return [ 'enterpriceCommercialItems' ];
     }
 }

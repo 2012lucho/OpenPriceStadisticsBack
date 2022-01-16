@@ -51,7 +51,7 @@ class m220113_153722_create_table_commercial_item extends Migration
                 'id'          => 11,
                 'name'        => 'enterprice_commercial_item', 
                 'description' => 'Empresas por rubro comercial',
-                'controller'  => 'PublicEnterpriceItemController',
+                'controller'  => 'PublicEnterpriceCommercialItemController',
                 'action'      => '*',
                 'method'      => '*'
             ]);

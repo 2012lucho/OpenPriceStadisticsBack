@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  *
  * @property Branch[] $branches
+ * @property EnterpriceCommercialItem[] $enterpriceCommercialItems
  */
 class Enterprice extends \yii\db\ActiveRecord
 {
@@ -52,5 +53,19 @@ class Enterprice extends \yii\db\ActiveRecord
     public function getBranches()
     {
         return $this->hasMany(Branch::className(), ['enterprise_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[EnterpriceCommercialItems]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEnterpriceCommercialItems()
+    {
+        return $this->hasMany(EnterpriceCommercialItem::className(), ['id_enterprice' => 'id']);
+    }
+
+    public function extraFields() {
+        return [ 'enterpriceCommercialItems' ];
     }
 }

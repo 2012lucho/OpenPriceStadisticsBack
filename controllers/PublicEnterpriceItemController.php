@@ -1,11 +1,9 @@
 <?php
 namespace app\controllers;
 
-use Yii;
 use yii\rest\ActiveController;
-use app\models\Enterprice;
 
-class PublicEnterpriceController extends PublicBaseController {
+class PublicEnterpriceItemController extends PublicBaseController {
 
     public function actions(){
         $actions = parent::actions();
@@ -17,6 +15,6 @@ class PublicEnterpriceController extends PublicBaseController {
         return $actions;
     }
 
-    public $modelClass = 'app\models\Enterprice';
+    public $modelClass = 'app\models\EnterpriceItem';
 
 }
