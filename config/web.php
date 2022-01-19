@@ -79,6 +79,7 @@ $config = [
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-enterprice-commercial-item', 'pluralize' => false ],
               [ 'class' => 'yii\rest\UrlRule', 'controller' => 'public-enterprice-item', 'pluralize' => false ],
 
+              [ 'class' => 'yii\rest\UrlRule', 'controller' => 'private-enterprice', 'pluralize' => false ],
               'products_by_price' => 'public-search-products/get-by-price',
             ],
         ],
