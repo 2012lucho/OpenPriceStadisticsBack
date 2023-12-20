@@ -1,8 +1,10 @@
 <?php
 namespace app\controllers;
 
+use Yii;
 use yii\rest\ActiveController;
 
+use app\models\Vendor;
 
 class PublicVendorController extends PublicBaseController {
 
@@ -11,6 +13,7 @@ class PublicVendorController extends PublicBaseController {
         unset( $actions['delete'],
                $actions['create'],
                $actions['update'],
+               $actions['index'],
              );
   
         return $actions;
@@ -18,4 +21,13 @@ class PublicVendorController extends PublicBaseController {
 
     public $modelClass = 'app\models\Vendor';
 
+    public function actionIndex(){
+        $params = Yii::$app->request->queryParams;
+
+        $query = Vendor::find();
+        
+        $query = $query->all();
+        
+        return ['items' => $query]; 
+    }
 }
