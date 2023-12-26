@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\Cors;
 
 use app\models\Price;
+use app\models\SearchQueryHistory;
 
 class PublicSearchProductsController extends Controller { 
     
@@ -38,8 +39,20 @@ class PublicSearchProductsController extends Controller {
         }
         
         $query = $query->orderBy(['ultimo_precio_conocido' => SORT_DESC, 'price' => SORT_ASC])->limit(1000)->all();
-            
-        return ['items' => $query];    
+        
+        $salida = ['items' => $query];
+
+        try {
+            $history = new SearchQueryHistory();
+            $history->query = $params['product_name'];
+
+            $history->save(false);
+        } catch (\Throwable $th) {
+            //throw $th;
+            $salida['errors'] = $th->getMessage();
+        }
+
+        return $salida;    
     }
       
 } 

@@ -27,7 +27,7 @@ def agregar_precio(cursor, reg):
     text_nuevo_precio = "Se agregó nuevo precio - Carga Masiva - "+reg['name']+" - "+str(reg['price'])
     cursor.execute("INSERT INTO price (product_id, price, date_time, branch_id, es_oferta, confiabilidad) VALUES (%s, %s, %s, %s, %s, %s)", (id_producto, reg['price'], fecha_actual, reg['branch_id'], 0, 100))
     cursor.execute("INSERT INTO news (text, datetime, type_id) VALUES (%s, %s, %s)", (text_nuevo_precio, fecha_actual, 1))
-            
+          
 with open('tmp/productos.json') as archivo_json:
     precios = json.load(archivo_json)
 
@@ -43,7 +43,7 @@ for reg in precios:
         continue
 
     if len(resultados) == 0:
-        cursor.execute("INSERT INTO products (name, vendor_id) VALUES (%s, %s)", (reg['name'], reg['vendor_id']))
+        cursor.execute("INSERT INTO products (name, vendor_id, ultimo_precio_conocido) VALUES (%s, %s, %s)", (reg['name'], reg['vendor_id'], fecha_actual))
         id_producto_agregado = cursor.lastrowid
         cursor.execute("INSERT INTO product_category (product_id, category_id) VALUES (%s, %s)", (id_producto_agregado, reg['category']))
         
@@ -58,7 +58,7 @@ for reg in precios:
         cursor.execute("SELECT * FROM products WHERE name =  %s", (str(reg['name']),))
         resultados = cursor.fetchone()
         id_producto = resultados[0]
-        
+        cursor.execute("UPDATE products SET ultimo_precio_conocido = %s WHERE id = %s", (fecha_actual, id_producto))
         cursor.execute("SELECT * FROM price WHERE product_id = %s and branch_id = %s AND confiabilidad > 90 ORDER BY date_time DESC LIMIT 1  ", (id_producto, reg['branch_id']))
         resultados = cursor.fetchone()
         
@@ -70,14 +70,18 @@ for reg in precios:
             if not resultados[2] == reg['price']:
                 precios_cambiados.append(reg)
                 agregar_precio(cursor, reg)
+                text_nuevo_precio = "Se actualiza precio - Carga Masiva - "+reg['name']+" - "+str(reg['price'])
+                cursor.execute("INSERT INTO news (text, datetime, type_id) VALUES (%s, %s, %s)", (text_nuevo_precio, fecha_actual, 1))
             else:
                 print('Ya existe un precio para ese articulo en ese local, se actualiza la fecha')
-                cursor.execute("UPDATE products SET ultimo_precio_conocido = %s WHERE id = %s", (fecha_actual, id_producto))
+                text_nuevo_precio = "Se reafirma precio - Carga Masiva - "+reg['name']+" - "+str(reg['price'])
+                cursor.execute("INSERT INTO news (text, datetime, type_id) VALUES (%s, %s, %s)", (text_nuevo_precio, fecha_actual, 1))
                 fecha_ultimo_precio_upd.append(reg)
             precios_existentes.append(reg)
+
         productos_existentes.append(reg)
 
-conexion.commit()
+#conexion.commit()
 
 for producto in productos_existentes:
     print(producto)
