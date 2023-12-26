@@ -37,7 +37,7 @@ class PublicSearchProductsController extends Controller {
             $query->where(['like', 'products.name', '%'.urldecode($params['product_name']).'%', false ]);
         }
         
-        $query = $query->orderBy(['date_time' => SORT_DESC, 'price' => SORT_ASC])->limit(1000)->all();
+        $query = $query->orderBy(['ultimo_precio_conocido' => SORT_DESC, 'price' => SORT_ASC])->limit(1000)->all();
             
         return ['items' => $query];    
     }
