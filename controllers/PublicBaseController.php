@@ -73,7 +73,7 @@ class PublicBaseController extends ActiveController {
       $ip = $this->get_client_ip();
       //si no se pudo obtener la IP se indica error de cuota de uso excedida
       if ($ip === 'UNKNOWN'){
-        throw new \Exception('Cuota de uso excedida.');
+        //throw new \Exception('Cuota de uso excedida.');
       }
       
       //Se obtiene la cuota asignada a la funcionalidad
