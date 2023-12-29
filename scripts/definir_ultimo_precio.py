@@ -22,10 +22,15 @@ for producto in resultados:
     ultimo_precio = cursor.fetchone()
     
     if ultimo_precio != None:
-        ultimo_precio = ultimo_precio[3]
-        print('Fecha ultimo precio',ultimo_precio)
+        valor_ultimo_precio = ultimo_precio[2]
+        fecha_ultimo_precio = ultimo_precio[3]
+        
+        print('Fecha ultimo precio',fecha_ultimo_precio)
+        print("Precio: ", valor_ultimo_precio)
 
         sql = "UPDATE products SET ultimo_precio_conocido = %s WHERE id = %s"
-        cursor.execute(sql, (ultimo_precio, id_producto,))
-    
+        cursor.execute(sql, (fecha_ultimo_precio, id_producto,))
+        sql = "UPDATE products SET last_price = %s WHERE id = %s"
+        cursor.execute(sql, (valor_ultimo_precio, id_producto,))
+
 conexion.commit()

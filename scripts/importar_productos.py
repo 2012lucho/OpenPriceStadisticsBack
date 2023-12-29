@@ -2,7 +2,7 @@ import json
 import mysql.connector
 from datetime import datetime, timedelta
 
-fecha_actual = datetime.now().strftime("%Y-%m-%d")
+fecha_actual = datetime.now().strftime("%Y-%m-%d %H:%M")
 
 # Establecer la conexión con la base de datos
 conexion = mysql.connector.connect(
@@ -22,6 +22,7 @@ precios_existentes = []
 registros_agregados = []
 precios_cambiados = []
 fecha_ultimo_precio_upd = []
+NO_CAT = 155
 
 def agregar_precio(cursor, reg):
     text_nuevo_precio = "Se agregó nuevo precio - Carga Masiva - "+reg['name']+" - "+str(reg['price'])
@@ -36,6 +37,9 @@ for reg in precios:
     #Buscamos en la base de datos en la tabla products si existe un producto con el mismo nombre
     cursor.execute("SELECT * FROM products WHERE name =  %s", (str(reg['name']),))
     resultados = cursor.fetchall()
+
+    if not "category" in reg:
+        reg['category'] = NO_CAT
 
     if reg['category'] == -1 or reg['branch_id'] == -1:
         print("Producto con categoria o local erroneo")
@@ -55,24 +59,25 @@ for reg in precios:
         
     else:
         print("El producto ya existe")
-        cursor.execute("SELECT * FROM products WHERE name =  %s", (str(reg['name']),))
-        resultados = cursor.fetchone()
-        id_producto = resultados[0]
+        id_producto = resultados[0][0]
         cursor.execute("UPDATE products SET ultimo_precio_conocido = %s WHERE id = %s", (fecha_actual, id_producto))
+        cursor.execute("UPDATE products SET last_price = %s WHERE id = %s", (reg['price'], id_producto))
         cursor.execute("SELECT * FROM price WHERE product_id = %s and branch_id = %s AND confiabilidad > 90 ORDER BY date_time DESC LIMIT 1  ", (id_producto, reg['branch_id']))
         resultados = cursor.fetchone()
-        
+
         if (resultados == None):
             print('No se encontro precio, se agrega')
             agregar_precio(cursor, reg)
             registros_agregados.append(reg)
         else:
-            if not resultados[2] == reg['price']:
-                precios_cambiados.append(reg)
+            id_precio = resultados[0]
+            if not round(resultados[2], 1) == round(reg['price'],1):
+                precios_cambiados.append([ reg,  resultados ])
                 agregar_precio(cursor, reg)
                 text_nuevo_precio = "Se actualiza precio - Carga Masiva - "+reg['name']+" - "+str(reg['price'])
                 cursor.execute("INSERT INTO news (text, datetime, type_id) VALUES (%s, %s, %s)", (text_nuevo_precio, fecha_actual, 1))
             else:
+                cursor.execute("UPDATE price SET date_time = %s WHERE id = %s", (fecha_actual, id_precio))
                 print('Ya existe un precio para ese articulo en ese local, se actualiza la fecha')
                 text_nuevo_precio = "Se reafirma precio - Carga Masiva - "+reg['name']+" - "+str(reg['price'])
                 cursor.execute("INSERT INTO news (text, datetime, type_id) VALUES (%s, %s, %s)", (text_nuevo_precio, fecha_actual, 1))
@@ -81,10 +86,15 @@ for reg in precios:
 
         productos_existentes.append(reg)
 
-#conexion.commit()
+sql = "DELETE FROM news WHERE id NOT IN ( SELECT id  FROM ( SELECT id FROM news ORDER BY datetime DESC LIMIT 1000 ) AS subquery)"
+cursor.execute(sql)
 
-for producto in productos_existentes:
-    print(producto)
+conexion.commit()
+
+for precio in precios_cambiados:
+    print(precio[0])
+    print(precio[1])
+    print("")
 
 print("Cantidad productos existentes: ", len(productos_existentes))
 print("Cantidad total de precios: ", len(precios))
