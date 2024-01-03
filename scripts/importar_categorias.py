@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 import json
 import mysql.connector
 
@@ -18,6 +20,7 @@ with open('tmp/categorias.json') as archivo_json:
     categorias = json.load(archivo_json)
 
 for categoria in categorias:
+    categoria = categoria.strip()
     print("Procesado categoria Nivel 0: ",categoria)
 
     cursor.execute("SELECT * FROM category WHERE name =  %s", (str(categoria),))
@@ -63,7 +66,7 @@ for categoria in categorias:
             print(id_categoria)
 
 
-#conexion.commit()
+conexion.commit()
 
 with open('tmp/categorias.json', 'w') as file:
     json.dump(categorias, file)

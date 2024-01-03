@@ -1,8 +1,12 @@
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
 import json
 import mysql.connector
 from datetime import datetime, timedelta
 
 fecha_actual = datetime.now().strftime("%Y-%m-%d %H:%M")
+fecha = datetime.now().strftime("%Y%m%d")
+path = 'tmp/productos'+fecha+'.json'
 
 # Establecer la conexión con la base de datos
 conexion = mysql.connector.connect(
@@ -29,7 +33,7 @@ def agregar_precio(cursor, reg):
     cursor.execute("INSERT INTO price (product_id, price, date_time, branch_id, es_oferta, confiabilidad) VALUES (%s, %s, %s, %s, %s, %s)", (id_producto, reg['price'], fecha_actual, reg['branch_id'], 0, 100))
     cursor.execute("INSERT INTO news (text, datetime, type_id) VALUES (%s, %s, %s)", (text_nuevo_precio, fecha_actual, 1))
           
-with open('tmp/productos.json') as archivo_json:
+with open(path) as archivo_json:
     precios = json.load(archivo_json)
 
 for reg in precios:
@@ -71,7 +75,7 @@ for reg in precios:
             registros_agregados.append(reg)
         else:
             id_precio = resultados[0]
-            if not round(resultados[2], 1) == round(reg['price'],1):
+            if abs(round(resultados[2]) - round(reg['price'])) > 1:
                 precios_cambiados.append([ reg,  resultados ])
                 agregar_precio(cursor, reg)
                 text_nuevo_precio = "Se actualiza precio - Carga Masiva - "+reg['name']+" - "+str(reg['price'])
@@ -87,6 +91,9 @@ for reg in precios:
         productos_existentes.append(reg)
 
 sql = "DELETE FROM news WHERE id NOT IN ( SELECT id  FROM ( SELECT id FROM news ORDER BY datetime DESC LIMIT 1000 ) AS subquery)"
+cursor.execute(sql)
+
+sql = "DELETE FROM price WHERE price = 0"
 cursor.execute(sql)
 
 conexion.commit()

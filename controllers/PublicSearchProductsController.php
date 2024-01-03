@@ -40,20 +40,41 @@ class PublicSearchProductsController extends Controller {
         return ($fechaA < $fechaB) ? -1 : 1;
     }
 
-    public function actionGetByPrice() { 
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $params = Yii::$app->request->queryParams;
+    function hacer_busqueda( $busqueda,  $where_type ){
+        $query_params = explode(" ",urldecode($busqueda));
 
-        $salida = ['items' => []];
-
-        $query_params = explode(" ",urldecode($params['product_name']));
-        $products = Products::find();
-        
-        for ($i=0; $i < count($query_params); $i++) {
-            $products = $products->andWhere(['like', 'products.name', '%'.$query_params[$i].'%', false ]);
+        if($where_type == "AND") {
+            $products = Products::find();
+            for ($i=0; $i < count($query_params); $i++) {
+                $products = $products->andWhere(['like', 'products.name', '%'.$query_params[$i].'%', false ]);
+            }
+            $products = $products->all();
         }
-        
-        $products = $products->all();
+
+        if ($where_type == "OR") {
+            $sql = "SELECT * FROM products WHERE ";
+            $params = [];
+            
+            $array_nuevo = [];
+            for ($i=0; $i < count($query_params); $i++) {
+                if (strlen($query_params[$i]) > 3)
+                    $array_nuevo[] = $query_params[$i];
+            }
+
+            for ($i=0; $i < count($array_nuevo); $i++) {
+                if ($i > 0) {
+                    $sql .= 'XOR (products.name LIKE :p'.$i.' ) ';
+                } else
+                    $sql .= ' (products.name LIKE :p0 ) ';
+                
+                $params[":p".$i] = "%".$array_nuevo[$i]."%";
+            }
+
+            $sql .= " LIMIT 500";
+            
+            $products = Products::findBySql($sql, $params);
+            $products = $products->all();
+        }
 
         $aux = [];
 
@@ -102,12 +123,44 @@ class PublicSearchProductsController extends Controller {
         }
         usort($aux2, [$this, 'comparar_precios']);
 
-        $salida['items'] = $aux2;
+        return $aux2;
+    }
+
+    function verificarUltimaLetra($cadena, $letra) {
+        $ultimaLetra = substr($cadena, -1);
+        return strtolower($ultimaLetra) === $letra;
+    }
+
+    function quitarUltimoCaracter($cadena) {
+        return substr($cadena, 0, strlen($cadena) - 1);
+    }
+
+    public function actionGetByPrice() { 
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $params = Yii::$app->request->queryParams;
+
+        $salida = ['items' => []];
+
+        $query_inicial = $params['product_name'];
+
+        $salida['items'] = $this->hacer_busqueda($params['product_name'], "AND");
+        $cant_items_1 = count($salida['items']); 
+        if (count($salida['items']) < 3) {
+
+            $palabras = explode(" ",$params['product_name']);
+            
+            if (count($palabras) == 1 && $this->verificarUltimaLetra($params['product_name'], "s")) {
+
+                $params['product_name'] = $this->quitarUltimoCaracter($params['product_name']);
+                $salida['items'] = array_merge( $salida['items'], $this->hacer_busqueda($params['product_name'], "AND"));
+            
+            }            
+        }
 
         try {
             $history = new SearchQueryHistory();
-            $history->query = $params['product_name'];
-            $history->cant_results = count($salida['items']);
+            $history->query = $query_inicial;
+            $history->cant_results = $cant_items_1;
             $history->save(false);
         } catch (\Throwable $th) {
             //throw $th;
